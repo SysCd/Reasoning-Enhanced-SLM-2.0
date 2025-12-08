@@ -46,8 +46,6 @@ reasoning logic for machine learning datasets.
 
 #### First Principles Reasoning Architecture
 
-(Ensure the path matches your repo folder name)
-
 ![First Principles Thinking for AI](Diagrams/first_principles_thinking_ai.jpeg)
 
 ---
