@@ -114,13 +114,6 @@ Dataset stored in `reasoning_dataset.jsonl`, using an OpenAI-style message forma
 ]
 }
 
-Each example is transformed into Mistral instruction-tuning format:
-
-<s>[INST] system text + user question [/INST]
-assistant answer </s>
-
-This preserves conversational alignment while teaching precise reasoning.
-
 ---
 
 ## SECTION 4 — LOADED MODEL AND TRAINING OUTPUT
