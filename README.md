@@ -175,6 +175,26 @@ This aligns more with _applied alignment research_ than standard ML fine-tuning.
 
 ---
 
+## SECTION 8 — POST-FINETUNE VISUAL EVIDENCE
+
+### 1. Structured DevOps Reasoning
+
+The model demonstrates concise, principle-driven explanation patterns learned from the dataset, avoiding the verbosity typical of base models.
+
+![Structured DevOps Reasoning](Diagrams/output_devops_reasoning.jpeg)
+
+### 2. Deductive Reasoning Behavior (Physics)
+
+The model applies first-principles decomposition without explicit chain-of-thought prompting, showing that the _structure_ of reasoning has been internalized.
+
+![Deductive Reasoning Behavior](Diagrams/output_deductive_physics.jpeg)
+
+### 3. Multi-Step Compression (Economics)
+
+The model demonstrates the "compressed logic" architecture taught during training, breaking complex social science topics into atomic constraints and goals.
+
+![Multi-Step Compression](Diagrams/output_economics_compression.jpeg)
+
 ## LICENSE
 
 MIT License

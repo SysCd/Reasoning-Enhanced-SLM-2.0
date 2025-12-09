@@ -14,7 +14,7 @@ model = AutoModelForCausalLM.from_pretrained(
     low_cpu_mem_usage=False,
 ).to(device)
 
-prompt = "<s>[INST] You are a terse, highly technical DevOps & infra assistant. Answer directly.\n\nUser: Explain why a /16 VPC is usually split into multiple /24 subnets. [/INST]\n"
+prompt = "<s>[INST] You are a Economist. Answer directly.\n\nUser: Using first principles, explain Economics. [/INST]\n"
 
 inputs = tokenizer(prompt, return_tensors="pt").to(device)
 
