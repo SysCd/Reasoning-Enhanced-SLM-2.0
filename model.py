@@ -7,7 +7,7 @@ from peft import LoraConfig
 # Paths
 MODEL_PATH = "../Models/mistral-7b-instruct"
 DATA_PATH = "reasoning_dataset.jsonl"
-OUTPUT_DIR = "./mistral-7b-devops-lora"
+OUTPUT_DIR = "./mistral-7b-lora"
 
 # 1. Dataset helpers
 def pick_field(ex, candidates, name):

@@ -195,6 +195,106 @@ The model demonstrates the "compressed logic" architecture taught during trainin
 
 ![Multi-Step Compression](Diagrams/output_economics_compression.jpeg)
 
+---
+
+## SECTION 9 — RAG KNOWLEDGE LAYER (RETRIEVAL-AUGMENTED GENERATION)
+
+Reasoning-Enhanced SLM 2.0 includes a Retrieval-Augmented Generation (RAG) layer to provide **grounded, updatable domain knowledge** alongside the fine-tuned reasoning behavior.
+
+Fine-tuning shapes _how_ the model reasons.  
+RAG supplies _what_ the model knows.
+
+This separation allows the model to behave like a “well-read professor” without embedding factual knowledge into weights.
+
+![RAG](Diagrams/rag.jpeg)
+
+---
+
+### 9.1 High-Level Architecture
+
+The RAG system operates in two phases.
+
+#### Ingestion (offline / one-time)
+
+1. Download research papers (arXiv)
+2. Store documents locally
+3. Convert PDFs to text
+4. Chunk text into semantically coherent passages
+5. Generate embeddings using **OpenAI (`text-embedding-3-small`)**
+6. Store vectors and metadata in **Qdrant**
+
+#### Query-time (online)
+
+1. Embed user question (same embedding model)
+2. Perform semantic search over Qdrant
+3. Retrieve top-k relevant chunks
+4. Assemble prompt with retrieved context
+5. Generate answer using **Mistral-7B-Instruct (LoRA-fine-tuned, local runtime)**
+
+---
+
+### 9.2 RAG Components
+
+- **Embeddings**  
+  Model: `text-embedding-3-small` (OpenAI)  
+  Converts text into 1536-dimensional semantic vectors.
+
+- **Memory Store**  
+  Qdrant (local vector database).  
+  Persists embeddings and payload metadata (file path, chunk index, text).
+
+- **Retrieval**  
+  Dense semantic search using cosine similarity over Qdrant vectors.
+
+- **Generation**  
+  Mistral-7B-Instruct with LoRA adapters applies domain-specific reasoning to retrieved context.
+
+---
+
+### 9.3 Initial Knowledge Base
+
+The current RAG knowledge base is bootstrapped with **three arXiv research papers**, stored locally as text files.
+
+rag/data/docs/
+├── 2512.11254v2.txt
+├── 2512.17898v1.txt
+└── 2512.17901v1.txt
+
+Each document is split into overlapping chunks.  
+Each chunk is embedded and stored as an independent retrievable memory unit.
+
+---
+
+### 9.4 Why RAG Is Included
+
+RAG addresses limitations of fine-tuning alone:
+
+- **Updatability:** add or remove papers without retraining
+- **Grounding:** answers are supported by retrieved text
+- **Scalability:** knowledge grows via storage, not parameter updates
+
+The system combines:
+
+- **Behavioral alignment** (LoRA fine-tuning)
+- **Externalized knowledge memory** (RAG)
+
+---
+
+### 9.5 Current Status
+
+- Qdrant running locally
+- Research papers ingested and embedded
+- Query-time retrieval integrated with generation pipeline
+
+Planned extensions:
+
+- Larger document corpus
+- Section-aware chunking
+- Hybrid retrieval (BM25 + vectors)
+- Reranking for improved precision
+
+---
+
 ## LICENSE
 
 MIT License

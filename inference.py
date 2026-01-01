@@ -2,7 +2,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 BASE_MODEL_PATH = "../Models/mistral-7b-instruct"
-FINETUNED_PATH = "./mistral-7b-devops-lora"
+FINETUNED_PATH = "./mistral-7b-lora"
 
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
